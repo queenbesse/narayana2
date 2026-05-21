@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { SectionHeader } from "@/components/section-header"
 import { useI18n } from "@/lib/i18n"
 import { openWhatsApp, buildServiceEnquiryMessage } from "@/lib/whatsapp"
+import { asset } from "@/lib/utils"
 
 const serviceDetails = [
   {
@@ -107,7 +108,7 @@ export function ServicesPage() {
                 <div className={`grid gap-6 md:grid-cols-2 items-center ${!isEven ? "md:[direction:rtl]" : ""}`}>
                   <div className={!isEven ? "md:[direction:ltr]" : ""}>
                     <img
-                      src={service.img}
+                      src={asset(service.img)}
                       alt={t(`service.${service.key}`)}
                       className="rounded-xl w-full h-56 md:h-72 object-cover"
                       loading="lazy"

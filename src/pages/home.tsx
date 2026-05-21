@@ -8,6 +8,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { SectionHeader } from "@/components/section-header"
 import { useI18n } from "@/lib/i18n"
 import { openWhatsApp, buildServiceEnquiryMessage } from "@/lib/whatsapp"
+import { asset } from "@/lib/utils"
 
 const services = [
   { key: "laser", icon: Zap, img: "/service-laser-therapy.webp" },
@@ -94,7 +95,7 @@ export function HomePage() {
             </div>
             <div className="relative">
               <img
-                src="/hero-physio-treatment.webp"
+                src={asset("/hero-physio-treatment.webp")}
                 alt="Physiotherapy treatment session"
                 className="rounded-2xl object-cover w-full h-64 md:h-96 shadow-lg"
                 loading="eager"
@@ -150,7 +151,7 @@ export function HomePage() {
                 <Card key={service.key} className="group overflow-hidden transition-shadow hover:shadow-md">
                   <div className="relative h-40 overflow-hidden">
                     <img
-                      src={service.img}
+                      src={asset(service.img)}
                       alt={t(`service.${service.key}`)}
                       className="h-full w-full object-cover transition-transform group-hover:scale-105"
                       loading="lazy"
@@ -197,7 +198,7 @@ export function HomePage() {
           <div className="grid gap-8 md:grid-cols-2 items-center">
             <div className="relative">
               <img
-                src="/images/DrAnjuJakhar..jpeg"
+                src={asset("/images/DrAnjuJakhar..jpeg")}
                 alt={t("doctor.name")}
                 className="rounded-2xl w-full h-72 md:h-96 object-cover"
                 loading="lazy"
@@ -361,7 +362,7 @@ export function HomePage() {
             </div>
             <div>
               <img
-                src="/dry-needling-detail.webp"
+                src={asset("/dry-needling-detail.webp")}
                 alt="Dry Needling Therapy"
                 className="rounded-2xl w-full h-64 md:h-80 object-cover"
                 loading="lazy"
@@ -450,7 +451,7 @@ export function HomePage() {
             ].map((src, i) => (
               <img
                 key={i}
-                src={src}
+                src={asset(src)}
                 alt={`Clinic interior ${i + 1}`}
                 className="rounded-xl h-40 md:h-52 w-full object-cover"
                 loading="lazy"
@@ -541,7 +542,7 @@ export function HomePage() {
               <Card key={i} className="group overflow-hidden">
                 <div className="h-40 overflow-hidden">
                   <img
-                    src={tip.img}
+                    src={asset(tip.img)}
                     alt={tip.title}
                     className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     loading="lazy"

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { Phone, MapPin, Clock, MessageCircle } from "lucide-react"
 import { useI18n } from "@/lib/i18n"
 import { openWhatsApp } from "@/lib/whatsapp"
+import { asset } from "@/lib/utils"
 
 export function Footer() {
   const { t, lang } = useI18n()
@@ -12,7 +13,7 @@ export function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <img src="/logo.webp" alt="Narayana Physio Care" className="h-9 w-9 rounded-lg object-contain" />
+              <img src={asset("/logo.webp")} alt="Narayana Physio Care" className="h-9 w-9 rounded-lg object-contain" />
               <div>
                 <p className="text-sm font-semibold">{t("clinic.name")}</p>
                 <p className="text-[10px] text-muted-foreground">{t("clinic.tagline")}</p>

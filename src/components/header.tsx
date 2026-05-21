@@ -4,7 +4,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { useI18n } from "@/lib/i18n"
-import { cn } from "@/lib/utils"
+import { cn, asset } from "@/lib/utils"
 
 const navItems = [
   { key: "nav.home", path: "/" },
@@ -25,7 +25,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-16">
         <Link to="/" className="flex items-center gap-2">
-          <img src="/logo.webp" alt="Narayana Physio Care" className="h-9 w-9 rounded-lg object-contain" />
+          <img src={asset("/logo.webp")} alt="Narayana Physio Care" className="h-9 w-9 rounded-lg object-contain" />
           <div className="hidden sm:block">
             <p className="text-sm font-semibold leading-tight">{t("clinic.name")}</p>
             <p className="text-[10px] text-muted-foreground leading-tight">{t("clinic.tagline")}</p>

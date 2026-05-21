@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { SectionHeader } from "@/components/section-header"
 import { useI18n } from "@/lib/i18n"
 import { openWhatsApp } from "@/lib/whatsapp"
+import { asset } from "@/lib/utils"
 
 const tips = [
   {
@@ -99,7 +100,7 @@ export function TipsPage() {
             <div className="grid md:grid-cols-2">
               <div className="h-56 md:h-72">
                 <img
-                  src={tips[0].img}
+                  src={asset(tips[0].img)}
                   alt={lang === "hi" ? tips[0].titleHi : tips[0].title}
                   className="h-full w-full object-cover"
                   loading="eager"
@@ -133,7 +134,7 @@ export function TipsPage() {
               <Card key={i} className="group overflow-hidden">
                 <div className="h-40 overflow-hidden">
                   <img
-                    src={tip.img}
+                    src={asset(tip.img)}
                     alt={lang === "hi" ? tip.titleHi : tip.title}
                     className="h-full w-full object-cover transition-transform group-hover:scale-105"
                     loading="lazy"

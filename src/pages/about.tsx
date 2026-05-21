@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { SectionHeader } from "@/components/section-header"
 import { useI18n } from "@/lib/i18n"
 import { openWhatsApp } from "@/lib/whatsapp"
+import { asset } from "@/lib/utils"
 
 const milestones = [
   { year: "2012", en: "Started clinical practice", hi: "नैदानिक अभ्यास शुरू किया" },
@@ -47,7 +48,7 @@ export function AboutPage() {
           <div className="grid gap-8 md:grid-cols-2 items-center">
             <div className="relative">
               <img
-                src="/images/DrAnjuJakhar..jpeg"
+                src={asset("/images/DrAnjuJakhar..jpeg")}
                 alt={t("doctor.name")}
                 className="rounded-2xl w-full h-80 md:h-[480px] object-cover"
                 loading="eager"
@@ -183,7 +184,7 @@ export function AboutPage() {
             ].map((src, i) => (
               <img
                 key={i}
-                src={src}
+                src={asset(src)}
                 alt={`Clinic interior ${i + 1}`}
                 className="rounded-xl h-40 md:h-52 w-full object-cover"
                 loading="lazy"

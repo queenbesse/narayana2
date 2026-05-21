@@ -11,7 +11,7 @@ import { I18nProvider } from "@/lib/i18n.tsx"
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <HelmetProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <ThemeProvider defaultTheme="dark">
           <I18nProvider>
             <App />
