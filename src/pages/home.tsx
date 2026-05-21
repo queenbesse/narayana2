@@ -198,7 +198,7 @@ export function HomePage() {
           <div className="grid gap-8 md:grid-cols-2 items-center">
             <div className="relative">
               <img
-                src={asset("/images/DrAnjuJakhar..jpeg")}
+                src={asset("/images/dr-anju2.jpeg")}
                 alt={t("doctor.name")}
                 className="rounded-2xl w-full h-72 md:h-96 object-cover"
                 loading="lazy"

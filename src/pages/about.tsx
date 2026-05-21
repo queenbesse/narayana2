@@ -48,7 +48,7 @@ export function AboutPage() {
           <div className="grid gap-8 md:grid-cols-2 items-center">
             <div className="relative">
               <img
-                src={asset("/images/DrAnjuJakhar..jpeg")}
+                src={asset("/images/dr-anju2.jpeg")}
                 alt={t("doctor.name")}
                 className="rounded-2xl w-full h-80 md:h-[480px] object-cover"
                 loading="eager"
