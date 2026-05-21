@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { SectionHeader } from "@/components/section-header"
 import { useI18n } from "@/lib/i18n"
-import { openWhatsApp, buildServiceEnquiryMessage } from "@/lib/whatsapp"
+import { openWhatsApp, buildServiceEnquiryMessage, buildConditionEnquiryMessage } from "@/lib/whatsapp"
 import { asset } from "@/lib/utils"
 
 const serviceDetails = [
@@ -73,6 +73,184 @@ const specializations = [
   { en: "Geriatric Physiotherapy", hi: "वृद्ध फिजियोथेरेपी" },
   { en: "Post-Surgical Rehabilitation", hi: "सर्जरी के बाद पुनर्वास" },
   { en: "Pain Management", hi: "दर्द प्रबंधन" },
+]
+
+const conditionsTreated = [
+  {
+    en: "Arthritis & Osteoarthritis",
+    hi: "गठिया और ऑस्टियोआर्थराइटिस",
+    desc: "Joint inflammation causing pain, stiffness, and reduced mobility",
+    descHi: "जोड़ों में सूजन जो दर्द, कठोरता और कम गतिशीलता का कारण बनती है",
+    img: "https://images.pexels.com/photos/7298685/pexels-photo-7298685.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Low Back Pain / Sciatica",
+    hi: "कमर दर्द / साइटिका",
+    desc: "Pain in the lower back often radiating to legs due to nerve compression",
+    descHi: "पीठ के निचले हिस्से में दर्द जो अक्सर तंत्रिका दबाव के कारण पैरों तक फैलता है",
+    img: "https://images.pexels.com/photos/5473184/pexels-photo-5473184.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Frozen Shoulder",
+    hi: "फ्रोजन शोल्डर",
+    desc: "Stiffness and pain in the shoulder joint limiting movement",
+    descHi: "कंधे के जोड़ में कठोरता और दर्द जो गति को सीमित करता है",
+    img: "https://images.pexels.com/photos/5473186/pexels-photo-5473186.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Cervical Spondylosis",
+    hi: "सर्वाइकल स्पॉन्डिलोसिस",
+    desc: "Age-related wear of the spinal discs in the neck",
+    descHi: "गर्दन में रीढ़ की डिस्क का उम्र संबंधित घिसाव",
+    img: "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Knee Pain",
+    hi: "घुटने का दर्द",
+    desc: "Pain from osteoarthritis, ligament injuries, or meniscal tears",
+    descHi: "ऑस्टियोआर्थराइटिस, लिगामेंट चोटों या मेनिस्कल टियर से दर्द",
+    img: "https://images.pexels.com/photos/4506109/pexels-photo-4506109.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Neck Pain",
+    hi: "गर्दन दर्द",
+    desc: "Pain and stiffness in the cervical region from posture or injury",
+    descHi: "मुद्रा या चोट से गर्दन के क्षेत्र में दर्द और कठोरता",
+    img: "https://images.pexels.com/photos/5473177/pexels-photo-5473177.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Cerebral Palsy",
+    hi: "सेरेब्रल पाल्सी",
+    desc: "Movement and posture disorders requiring specialized rehabilitation",
+    descHi: "गति और मुद्रा विकार जिनके लिए विशेष पुनर्वास की आवश्यकता होती है",
+    img: "https://images.pexels.com/photos/6111610/pexels-photo-6111610.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Hemiplegia",
+    hi: "हेमिप्लेजिया",
+    desc: "Paralysis of one side of the body requiring neuro rehabilitation",
+    descHi: "शरीर के एक तरफ का पक्षाघात जिसके लिए न्यूरो पुनर्वास की आवश्यकता होती है",
+    img: "https://images.pexels.com/photos/6551142/pexels-photo-6551142.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Post Fracture Rehabilitation",
+    hi: "फ्रैक्चर के बाद पुनर्वास",
+    desc: "Rehabilitation after bone fractures to restore strength and mobility",
+    descHi: "ताकत और गतिशीलता बहाल करने के लिए हड्डी के फ्रैक्चर के बाद पुनर्वास",
+    img: "https://images.pexels.com/photos/5473170/pexels-photo-5473170.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Joint Replacement (TKR, THR)",
+    hi: "जॉइंट रिप्लेसमेंट (TKR, THR)",
+    desc: "Post-surgical rehabilitation for knee and hip replacement surgeries",
+    descHi: "घुटने और कूल्हे की रिप्लेसमेंट सर्जरी के बाद पुनर्वास",
+    img: "https://images.pexels.com/photos/7298902/pexels-photo-7298902.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Tennis / Golfers Elbow",
+    hi: "टेनिस / गोल्फर्स एल्बो",
+    desc: "Pain in the elbow from repetitive forearm movements",
+    descHi: "दोहराव वाली अग्रबाहु गतिविधियों से कोहनी में दर्द",
+    img: "https://images.pexels.com/photos/5473223/pexels-photo-5473223.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Plantar Fasciitis",
+    hi: "प्लांटर फेसाइटिस",
+    desc: "Heel pain from inflammation of the tissue connecting heel to toes",
+    descHi: "एड़ी को पैर की उंगलियों से जोड़ने वाले ऊतक की सूजन से एड़ी में दर्द",
+    img: "https://images.pexels.com/photos/5473195/pexels-photo-5473195.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Carpal Tunnel Syndrome",
+    hi: "कार्पल टनल सिंड्रोम",
+    desc: "Numbness and tingling in hand due to nerve compression at wrist",
+    descHi: "कलाई पर तंत्रिका दबाव के कारण हाथ में सुन्नपन और झुनझुनी",
+    img: "https://images.pexels.com/photos/4506106/pexels-photo-4506106.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Hip Pain",
+    hi: "कूल्हे का दर्द",
+    desc: "Pain in the hip joint from arthritis, bursitis, or injury",
+    descHi: "गठिया, बर्साइटिस या चोट से कूल्हे के जोड़ में दर्द",
+    img: "https://images.pexels.com/photos/4506217/pexels-photo-4506217.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Soft Tissue Injuries",
+    hi: "सॉफ्ट टिश्यू चोटें",
+    desc: "Damage to muscles, ligaments, and tendons from injury or overuse",
+    descHi: "चोट या अत्यधिक उपयोग से मांसपेशियों, लिगामेंट्स और टेंडन को नुकसान",
+    img: "https://images.pexels.com/photos/3760275/pexels-photo-3760275.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Headaches",
+    hi: "सिरदर्द",
+    desc: "Tension headaches and cervicogenic headaches treated with manual therapy",
+    descHi: "मैनुअल थेरेपी से इलाज किए जाने वाले तनाव सिरदर्द",
+    img: "https://images.pexels.com/photos/3807730/pexels-photo-3807730.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Sprained Ankle",
+    hi: "मोच आई टखना",
+    desc: "Ligament injury from ankle twisting requiring rehabilitation",
+    descHi: "टखने के मुड़ने से लिगामेंट की चोट जिसके लिए पुनर्वास की आवश्यकता है",
+    img: "https://images.pexels.com/photos/3760262/pexels-photo-3760262.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Shin Splints",
+    hi: "शिन स्प्लिंट्स",
+    desc: "Pain along the shin bone from overuse during exercise",
+    descHi: "व्यायाम के दौरान अत्यधिक उपयोग से पिंडली की हड्डी में दर्द",
+    img: "https://images.pexels.com/photos/3756042/pexels-photo-3756042.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Hamstring Strain",
+    hi: "हैमस्ट्रिंग स्ट्रेन",
+    desc: "Muscle tears at the back of thigh from sports or sudden movements",
+    descHi: "खेल या अचानक गतिविधियों से जांघ के पीछे की मांसपेशियों में खिंचाव",
+    img: "https://images.pexels.com/photos/3760790/pexels-photo-3760790.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Achilles Tendon",
+    hi: "एकिलीज टेंडन",
+    desc: "Inflammation or tears of the tendon connecting calf to heel",
+    descHi: "पिंडली को एड़ी से जोड़ने वाले कंडरा में सूजन या दरार",
+    img: "https://images.pexels.com/photos/4498155/pexels-photo-4498155.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Heel Pain",
+    hi: "एड़ी का दर्द",
+    desc: "Pain under or behind the heel from various causes",
+    descHi: "विभिन्न कारणों से एड़ी के नीचे या पीछे दर्द",
+    img: "https://images.pexels.com/photos/5473195/pexels-photo-5473195.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Wrist Pain",
+    hi: "कलाई का दर्द",
+    desc: "Pain from overuse, injury, or conditions like tendinitis",
+    descHi: "अत्यधिक उपयोग, चोट या टेंडिनाइटिस जैसी स्थितियों से दर्द",
+    img: "https://images.pexels.com/photos/4506106/pexels-photo-4506106.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Calf Strain",
+    hi: "पिंडली का खिंचाव",
+    desc: "Injury to calf muscles causing pain during walking or running",
+    descHi: "पिंडली की मांसपेशियों में चोट जो चलने या दौड़ने में दर्द करती है",
+    img: "https://images.pexels.com/photos/3756165/pexels-photo-3756165.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Catching Shoulder",
+    hi: "कैचिंग शोल्डर",
+    desc: "Shoulder impingement causing pain during arm movement",
+    descHi: "कंधे का इम्पिंजमेंट जो भुजा की गति के दौरान दर्द का कारण बनता है",
+    img: "https://images.pexels.com/photos/5473186/pexels-photo-5473186.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
+  {
+    en: "Cervical Spine Issues",
+    hi: "सर्वाइकल स्पाइन",
+    desc: "Disc problems, nerve compression, and degenerative changes in neck",
+    descHi: "गर्दन में डिस्क समस्याएं, तंत्रिका दबाव और अपक्षयी परिवर्तन",
+    img: "https://images.pexels.com/photos/5473182/pexels-photo-5473182.jpeg?auto=compress&cs=tinysrgb&w=600",
+  },
 ]
 
 export function ServicesPage() {
@@ -172,8 +350,50 @@ export function ServicesPage() {
         </div>
       </section>
 
-      {/* Equipment */}
+      {/* Conditions We Treat */}
       <section className="py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <SectionHeader
+            title={lang === "hi" ? "हम किन स्थितियों का इलाज करते हैं" : "Conditions We Treat"}
+            subtitle={lang === "hi" ? "विभिन्न दर्द और गतिशीलता समस्याओं के लिए विशेषज्ञ फिजियोथेरेपी" : "Expert physiotherapy for a wide range of pain and mobility conditions"}
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {conditionsTreated.map((condition) => (
+              <Card key={condition.en} className="group overflow-hidden transition-shadow hover:shadow-md">
+                <div className="relative h-36 overflow-hidden">
+                  <img
+                    src={condition.img}
+                    alt={lang === "hi" ? condition.hi : condition.en}
+                    className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <h3 className="absolute bottom-2 left-3 right-3 text-sm font-semibold text-white">
+                    {lang === "hi" ? condition.hi : condition.en}
+                  </h3>
+                </div>
+                <CardContent className="p-3">
+                  <p className="text-xs text-muted-foreground line-clamp-2">
+                    {lang === "hi" ? condition.descHi : condition.desc}
+                  </p>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="mt-2 gap-1 px-0 text-xs text-primary hover:text-primary"
+                    onClick={() => openWhatsApp(buildConditionEnquiryMessage(lang === "hi" ? condition.hi : condition.en, lang))}
+                  >
+                    {t("cta.enquireNow")}
+                    <ArrowRight className="h-3 w-3" />
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Equipment */}
+      <section className="bg-card py-12 md:py-16">
         <div className="mx-auto max-w-7xl px-4">
           <SectionHeader
             title={lang === "hi" ? "हमारे उपकरण और तकनीक" : "Our Equipment & Technology"}
