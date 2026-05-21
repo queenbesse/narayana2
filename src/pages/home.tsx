@@ -95,8 +95,8 @@ export function HomePage() {
             </div>
             <div className="relative">
               <img
-                src={asset("/hero-physio-treatment.webp")}
-                alt="Physiotherapy treatment session"
+                src={asset("/images/DrAnjuJakhar..jpeg")}
+                alt="Dr. Anju Jakhar - Physiotherapist"
                 className="rounded-2xl object-cover w-full h-64 md:h-96 shadow-lg"
                 loading="eager"
               />
