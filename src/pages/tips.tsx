@@ -158,36 +158,6 @@ export function TipsPage() {
         </div>
       </section>
 
-      {/* Exercise Videos placeholder */}
-      <section className="bg-card py-12 md:py-16">
-        <div className="mx-auto max-w-7xl px-4">
-          <SectionHeader
-            title={lang === "hi" ? "व्यायाम वीडियो" : "Exercise Videos"}
-            subtitle={lang === "hi" ? "घर पर करने योग्य व्यायाम" : "Exercises you can do at home"}
-          />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { en: "Morning Stretching Routine", hi: "सुबह की स्ट्रेचिंग दिनचर्या" },
-              { en: "Back Pain Relief Exercises", hi: "कमर दर्द राहत व्यायाम" },
-              { en: "Knee Strengthening at Home", hi: "घर पर घुटने मजबूत करना" },
-            ].map((video) => (
-              <Card key={video.en} className="overflow-hidden">
-                <div className="h-40 bg-muted flex items-center justify-center">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 border-2 border-primary/20">
-                    <div className="h-0 w-0 border-t-[8px] border-t-transparent border-l-[14px] border-l-primary border-b-[8px] border-b-transparent ml-1" />
-                  </div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="text-sm font-semibold">{lang === "hi" ? video.hi : video.en}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {lang === "hi" ? "जल्द आ रहा है" : "Coming Soon"}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <section className="py-12 md:py-16">
